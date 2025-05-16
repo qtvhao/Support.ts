@@ -1,13 +1,12 @@
-import { Container } from 'inversify';
-
+import { Application } from 'contracts.ts'
 export abstract class ServiceProvider {
-  protected app: Container;
+  protected app: Application;
 
   protected static publishes: Record<string, string[]> = {};
   private bootingCallbacks: (() => void)[] = [];
   private bootedCallbacks: (() => void)[] = [];
 
-  constructor(appInstance: Container) {
+  constructor(appInstance: Application) {
     this.app = appInstance;
   }
 

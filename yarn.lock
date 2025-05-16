@@ -54,6 +54,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"contracts.ts@github:qtvhao/Contracts.ts":
+  version: 1.0.0
+  resolution: "contracts.ts@https://github.com/qtvhao/Contracts.ts.git#commit=9da55856bc4da8943b580022d5794fb7c5f3b635"
+  dependencies:
+    inversify: ^7.5.1
+    support.ts: "github:qtvhao/Support.ts"
+  checksum: 56527db3093ebd83744122e2009e4ad07b543ea933d24e29afbf7d4b6beb7bb002d765b462f4158b01dfa3368f709e3d46da698a95c74ef423b0936f06c98e1a
+  languageName: node
+  linkType: hard
+
 "inversify@npm:^7.5.1":
   version: 7.5.1
   resolution: "inversify@npm:7.5.1"
@@ -67,10 +77,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"support.ts@github:qtvhao/Support.ts":
+  version: 1.0.0
+  resolution: "support.ts@https://github.com/qtvhao/Support.ts.git#commit=82482f6a66e45350dd3c4b103439e1799b8b8724"
+  dependencies:
+    inversify: ^7.5.1
+  checksum: 67c041a235c0a49271db158c4d65f2b2953830cb6fd5ea9cad493240e6cc1679eb71e651b11428f859172ac4428488ac02d59463304de42d0909494c18b1128b
+  languageName: node
+  linkType: hard
+
 "support.ts@workspace:.":
   version: 0.0.0-use.local
   resolution: "support.ts@workspace:."
   dependencies:
+    contracts.ts: "github:qtvhao/Contracts.ts"
     inversify: ^7.5.1
   languageName: unknown
   linkType: soft
