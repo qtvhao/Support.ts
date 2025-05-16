@@ -1,0 +1,23 @@
+{
+  "name": "support.ts",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/qtvhao/Support.ts#readme",
+  "bugs": {
+    "url": "https://github.com/qtvhao/Support.ts/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qtvhao/Support.ts.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "inversify": "^7.5.1"
+  }
+}
