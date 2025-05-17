@@ -53,11 +53,4 @@ export abstract class ServiceProvider implements IServiceProvider {
   public provides(): string[] {
     return [];
   }
-
-  /**
-   * Specify conditions under which this provider should be loaded
-   */
-  public when(): string[] {
-    return [];
-  }
 }
