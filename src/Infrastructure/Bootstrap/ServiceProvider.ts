@@ -1,5 +1,5 @@
-import { Application } from 'contracts.ts'
-export abstract class ServiceProvider {
+import { IServiceProvider, Application } from 'contracts.ts'
+export abstract class ServiceProvider implements IServiceProvider {
   protected app: Application;
 
   protected static publishes: Record<string, string[]> = {};
