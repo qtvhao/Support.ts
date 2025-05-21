@@ -56,10 +56,10 @@ __metadata:
 
 "contracts.ts@github:qtvhao/Contracts.ts":
   version: 1.0.0
-  resolution: "contracts.ts@https://github.com/qtvhao/Contracts.ts.git#commit=b33d6c411e3deda069668e5b940867b4f3c34ea1"
+  resolution: "contracts.ts@https://github.com/qtvhao/Contracts.ts.git#commit=e4b375b55766cf7f48eeb9288f0198bfd03290ca"
   dependencies:
     inversify: ^7.5.1
-  checksum: 274c08ac70aa12498f9ae2f2c654469981730eda54ded2861db7e1c9a53256fa5500113f3cf2bd505871025b44e460aec6585df28e6d336fb3a7012b72f97279
+  checksum: 878f0274cf201982d8ce4cd5dd9b6aaf9d76e1f67507922289558df52e349082c7ef2f05022802938e02409ff059f5bd013a3579cfac0a8e579ef09f79629f15
   languageName: node
   linkType: hard
 

@@ -1,6 +1,6 @@
 import { IServiceProvider, Application } from 'contracts.ts'
 export abstract class ServiceProvider implements IServiceProvider {
-  protected app: Application;
+  app: Application;
 
   protected static publishes: Record<string, string[]> = {};
   private bootingCallbacks: (() => void)[] = [];
