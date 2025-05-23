@@ -4,7 +4,7 @@ import { EventConstructor, IDomainEvent } from "contracts.ts";
  * Associates Kafka topics with domain event constructors.
  * Used to determine the correct event class for a given topic.
  */
-export class TopicRegistry {
+export class EventTopicMapper {
   private readonly topics = new Map<string, EventConstructor<IDomainEvent>>();
 
   register(topic: string, eventCtor: EventConstructor<IDomainEvent>): void {
