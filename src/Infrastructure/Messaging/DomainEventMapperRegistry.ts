@@ -1,20 +1,25 @@
-import { IDomainEvent, IDomainEventMapper, IDomainEventMapperRegistry } from "contracts.ts";
+import {
+  IDomainEvent,
+  IDomainEventMapper,
+  IDomainEventMapperRegistry,
+} from "contracts.ts";
 
 /**
- * Maintains a registry of event mappers by event name.
- * Supports adding and retrieving mappers for serialization and deserialization.
+ * Associates Kafka topics with domain event constructors.
+ * Used to determine the correct event class for a given topic.
  */
-export class DomainEventMapperRegistry implements IDomainEventMapperRegistry {
-  private readonly mappers: Map<string, IDomainEventMapper<any, any>> = new Map();
+export class DomainEventMapperRegistry
+  implements IDomainEventMapperRegistry<IDomainEvent, object> {
+  private readonly topics = new Map();
 
-  get(eventName: string): IDomainEventMapper<any, any> | undefined {
-    return this.mappers.get(eventName);
+  set(
+    topic: string,
+    domainEventMapper: IDomainEventMapper<object, IDomainEvent>,
+  ): void {
+    this.topics.set(topic, domainEventMapper);
   }
 
-  set<T extends IDomainEvent, U>(
-    eventName: string,
-    mapper: IDomainEventMapper<U, T>,
-  ): void {
-    this.mappers.set(eventName, mapper);
+  get(topic: string): IDomainEventMapper<object, IDomainEvent> {
+    return this.topics.get(topic);
   }
 }
