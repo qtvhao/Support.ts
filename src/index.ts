@@ -1,5 +1,5 @@
 import { ServiceProvider } from "./Infrastructure/Bootstrap/ServiceProvider";
-import { EventMapperRegistry } from "./Infrastructure/Messaging/EventMapperRegistry";
+import { DomainEventMapperRegistry } from "./Infrastructure/Messaging/DomainEventMapperRegistry";
 import { TopicRegistry } from "./Infrastructure/Messaging/Kafka/TopicRegistry";
 
-export { EventMapperRegistry, ServiceProvider, TopicRegistry };
+export { DomainEventMapperRegistry, ServiceProvider, TopicRegistry };
