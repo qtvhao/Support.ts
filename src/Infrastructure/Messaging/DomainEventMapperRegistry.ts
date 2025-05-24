@@ -2,6 +2,7 @@ import {
   IDomainEvent,
   IDomainEventMapper,
   IDomainEventMapperRegistry,
+  Message,
 } from "contracts.ts";
 
 /**
@@ -14,12 +15,12 @@ export class DomainEventMapperRegistry
 
   set(
     topic: string,
-    domainEventMapper: IDomainEventMapper<object, IDomainEvent>,
+    domainEventMapper: IDomainEventMapper<Message, IDomainEvent>,
   ): void {
     this.topics.set(topic, domainEventMapper);
   }
 
-  get(topic: string): IDomainEventMapper<object, IDomainEvent> {
+  get(topic: string): IDomainEventMapper<Message, IDomainEvent> {
     return this.topics.get(topic);
   }
 }
