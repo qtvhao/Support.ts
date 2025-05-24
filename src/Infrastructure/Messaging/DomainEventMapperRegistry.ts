@@ -10,7 +10,7 @@ import {
  * Used to determine the correct event class for a given topic.
  */
 export class DomainEventMapperRegistry
-  implements IDomainEventMapperRegistry<IDomainEvent, object> {
+  implements IDomainEventMapperRegistry<IDomainEvent, Message> {
   private readonly topics = new Map();
 
   set(
