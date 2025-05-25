@@ -1,10 +1,11 @@
-import { IServiceProvider, Application } from 'contracts.ts'
+import { Application, IServiceProvider } from "contracts.ts";
 export abstract class ServiceProvider implements IServiceProvider {
   app: Application;
 
   protected static publishes: Record<string, string[]> = {};
   private bootingCallbacks: (() => void)[] = [];
   private bootedCallbacks: (() => void)[] = [];
+  private shutdownCallbacks: (() => void)[] = [];
 
   constructor(appInstance: Application) {
     this.app = appInstance;
@@ -43,6 +44,16 @@ export abstract class ServiceProvider implements IServiceProvider {
    */
   public callBootedCallbacks(): void {
     for (const callback of this.bootedCallbacks) {
+      callback();
+    }
+  }
+
+  public onShutdown(callback: () => void): void {
+    this.shutdownCallbacks.push(callback);
+  }
+
+  public callShutdownCallbacks(): void {
+    for (const callback of this.shutdownCallbacks) {
       callback();
     }
   }
