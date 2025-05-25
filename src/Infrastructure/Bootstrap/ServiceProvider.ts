@@ -1,13 +1,13 @@
-import { Application, IServiceProvider } from "contracts.ts";
+import { IApplication, IServiceProvider } from "contracts.ts";
 export abstract class ServiceProvider implements IServiceProvider {
-  app: Application;
+  app: IApplication;
 
   protected static publishes: Record<string, string[]> = {};
   private bootingCallbacks: (() => void)[] = [];
   private bootedCallbacks: (() => void)[] = [];
   private shutdownCallbacks: (() => void)[] = [];
 
-  constructor(appInstance: Application) {
+  constructor(appInstance: IApplication) {
     this.app = appInstance;
   }
 
@@ -33,7 +33,7 @@ export abstract class ServiceProvider implements IServiceProvider {
   /**
    * Execute all booting callbacks
    */
-  public callBootingCallbacks(): void {
+  public async callBootingCallbacks(): Promise<void> {
     for (const callback of this.bootingCallbacks) {
       callback();
     }
@@ -42,7 +42,7 @@ export abstract class ServiceProvider implements IServiceProvider {
   /**
    * Execute all booted callbacks
    */
-  public callBootedCallbacks(): void {
+  public async callBootedCallbacks(): Promise<void> {
     for (const callback of this.bootedCallbacks) {
       callback();
     }
