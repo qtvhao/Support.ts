@@ -3,9 +3,9 @@ export abstract class ServiceProvider implements IServiceProvider {
   app: IApplication;
 
   protected static publishes: Record<string, string[]> = {};
-  private bootingCallbacks: (() => void)[] = [];
-  private bootedCallbacks: (() => void)[] = [];
-  private shutdownCallbacks: (() => void)[] = [];
+  private bootingCallbacks: (() => Promise<void>)[] = [];
+  private bootedCallbacks: (() => Promise<void>)[] = [];
+  private shutdownCallbacks: (() => Promise<void>)[] = [];
 
   constructor(appInstance: IApplication) {
     this.app = appInstance;
@@ -47,7 +47,7 @@ export abstract class ServiceProvider implements IServiceProvider {
    */
   public async callBootingCallbacks(): Promise<void> {
     for (const callback of this.bootingCallbacks) {
-      callback();
+      await callback();
     }
   }
 
@@ -56,7 +56,7 @@ export abstract class ServiceProvider implements IServiceProvider {
    */
   public async callBootedCallbacks(): Promise<void> {
     for (const callback of this.bootedCallbacks) {
-      callback();
+      await callback();
     }
   }
 
@@ -64,9 +64,9 @@ export abstract class ServiceProvider implements IServiceProvider {
     this.addCallback(this.shutdownCallbacks, callback, toStart);
   }
 
-  public callShutdownCallbacks(): void {
+  public async callShutdownCallbacks(): Promise<void> {
     for (const callback of this.shutdownCallbacks) {
-      callback();
+      await callback();
     }
   }
 
