@@ -14,20 +14,32 @@ export abstract class ServiceProvider implements IServiceProvider {
   /**
    * Register bindings in the IoC container
    */
+  protected addCallback(
+    target: (() => void)[],
+    callback: () => void,
+    toStart: boolean = false,
+  ): void {
+    if (toStart) {
+      target.unshift(callback);
+    } else {
+      target.push(callback);
+    }
+  }
+
   public abstract register(): void;
 
   /**
    * Register a callback to run during the booting phase
    */
-  public booting(callback: () => void): void {
-    this.bootingCallbacks.push(callback);
+  public booting(callback: () => void, toStart: boolean = false): void {
+    this.addCallback(this.bootingCallbacks, callback, toStart);
   }
 
   /**
    * Register a callback to run after the service has booted
    */
-  public booted(callback: () => void): void {
-    this.bootedCallbacks.push(callback);
+  public booted(callback: () => void, toStart: boolean = false): void {
+    this.addCallback(this.bootedCallbacks, callback, toStart);
   }
 
   /**
@@ -48,8 +60,8 @@ export abstract class ServiceProvider implements IServiceProvider {
     }
   }
 
-  public onShutdown(callback: () => void): void {
-    this.shutdownCallbacks.push(callback);
+  public onShutdown(callback: () => void, toStart: boolean = false): void {
+    this.addCallback(this.shutdownCallbacks, callback, toStart);
   }
 
   public callShutdownCallbacks(): void {
