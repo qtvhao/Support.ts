@@ -1,26 +1,35 @@
 import {
+  EventConstructor,
   IDomainEvent,
   IDomainEventMapper,
   IDomainEventMapperRegistry,
   Message,
 } from "contracts.ts";
 
-/**
- * Associates Kafka topics with domain event constructors.
- * Used to determine the correct event class for a given topic.
- */
+// Support.ts/src/Infrastructure/Messaging/DomainEventMapperRegistry.ts
 export class DomainEventMapperRegistry
   implements IDomainEventMapperRegistry<IDomainEvent, Message> {
-  private readonly topics = new Map();
+  private registry = new Map<
+    EventConstructor<IDomainEvent>,
+    IDomainEventMapper<Message, IDomainEvent>
+  >();
 
-  set(
-    topic: string,
+  set<T extends IDomainEvent>(
+    eventCtor: EventConstructor<T>,
     domainEventMapper: IDomainEventMapper<Message, IDomainEvent>,
   ): void {
-    this.topics.set(topic, domainEventMapper);
+    this.registry.set(eventCtor, domainEventMapper);
   }
 
-  get(topic: string): IDomainEventMapper<Message, IDomainEvent> {
-    return this.topics.get(topic);
+  get<T extends IDomainEvent>(
+    eventCtor: EventConstructor<T>,
+  ): IDomainEventMapper<Message, IDomainEvent> {
+    const mapper = this.registry.get(eventCtor);
+    if (!mapper) {
+      throw new Error(
+        `No domain event mapper registered for constructor: ${eventCtor.name}`,
+      );
+    }
+    return mapper;
   }
 }
