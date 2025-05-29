@@ -76,4 +76,15 @@ export abstract class ServiceProvider implements IServiceProvider {
   public provides(): string[] {
     return [];
   }
+  public async mapEventTopics(): Promise<void> {
+    throw new Error("Method not implemented.");
+  }
+
+  public async registerEventMappers(): Promise<void> {
+    throw new Error("Method not implemented.");
+  }
+
+  public async subscribeEventHandlers(): Promise<void> {
+    throw new Error("Method not implemented.");
+  }
 }
